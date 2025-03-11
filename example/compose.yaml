@@ -1,0 +1,17 @@
+# Docker Compose file for pbc-docker
+services:
+  pbc-docker:
+    image: Cornelius-Figgle/pbc-docker
+    # this affects the name of your archive in PBS!
+    hostname: pbc-docker-HOSTNAME
+    restart: no
+    env_file:
+      # put your server's connection details here
+      - .env
+    volumes:
+      # refer to PBS's documentation for this
+      - ./config:/root/.config/proxmox-backup/
+      # each dir in /app/data will be backup up as an individual archive
+      - /DIRNAME1:/app/data/DIRNAME1:ro
+      - /DIRNAME2:/app/data/DIRNAME2:ro
+      - /DIRNAME3:/app/data/DIRNAME3:ro
